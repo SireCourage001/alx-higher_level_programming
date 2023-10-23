@@ -5,7 +5,7 @@ def safe_print_list(main_list =[], x=0):
     idx = 0
     for idx in range(x):
         try:
-            print(main_list[idx], end='')
+            print(main_list[idx], end="")
             idx += 1
             except IndexError:
                 break
