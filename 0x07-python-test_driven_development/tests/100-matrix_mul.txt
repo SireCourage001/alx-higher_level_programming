@@ -1,0 +1,21 @@
+	The module ``100-matrix_mul``
+==============================================
+
+Tests for the function ``matrix_mul``
+=====================================
+
+
+Import function from module
+---------------------------
+::
+	>>> matrix_mul = __import__("100-matrix_mul").matrix_mul
+
+
+Lists of lists with only integers
+---------------------------------
+::
+>>> matrix_mul([[3], [5]], [[2, 3]])
+	[[6, 9], [10, 15]]
+
+None:
+None
