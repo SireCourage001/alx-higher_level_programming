@@ -26,9 +26,11 @@ class Student:
         Args:
             attrs (list): (Optional) The attributes to represent.
         """
-        if (type(attrs) == list and
-                all(type(ele) == str for ele in attrs)):
-            return {k: getattr(self, k) for k in attrs if hasattr(self, k)}
-        return self.__dict__
+         a_dict = vars(self)
+        if type(attrs) == list and all(isinstance(i, str) for i in attrs):
+            new_dict = {}
+            for key in filter(lambda key: key in a_dict, attrs):
+                new_dict[key] = a_dict[key]
+            return new_dict
 
-
+        return a_dict

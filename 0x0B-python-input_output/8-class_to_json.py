@@ -3,4 +3,4 @@
 JSON function."""
 def class_to_json(obj):
     """Return dictionary represenation of simple data structure."""
-   return obj.__dict__
+   return vars(obj)_

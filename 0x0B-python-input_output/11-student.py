@@ -28,10 +28,14 @@ class Student:
             attrs (list): (Optional) The attributes to represent.
             """
 
-            if (type(attrs) == list and
-                all(type(ele) == str for ele in attrs)):
-            return {k: getattr(self, k) for k in attrs if hasattr(self, k)}
-        return self.__dict__
+            a_dict = vars(self)
+        if type(attrs) == list and all(isinstance(i, str) for i in attrs):
+            new_dict = {}
+            for key in filter(lambda key: key in a_dict, attrs):
+                new_dict[key] = a_dict[key]
+            return new_dict
+
+        return a_dict
 
     def reload_from_json(self, json):
         """Replace all attributes of the Student.
@@ -40,4 +44,5 @@ class Student:
             json (dict): The key/value pairs to replace attributes with.
         """
         for k, v in json.items():
-            setattr(self, k, v)
+            if k in vars(self):
+                setattr(self, k, v)
