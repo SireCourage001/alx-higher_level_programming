@@ -3,36 +3,37 @@
 """A module for base.py"""
 
 import json
+import turtle
 import csv
 from os import path
 
 class Base:
-"""Base class in the model dir/package.
+	"""Base class in the model dir/package.
 
-Attr:
-	nb_objects (int): Private class attr.
-"""
+	Attr:
+	    nb_objects (int): Private class attr.
+	"""
 
-__nb_objects = 0
+	__nb_objects = 0
 
 
-def __init__(self, id=None):
+    def __init__(self, id=None):
 	"""Initialize variables for instance of Base class.
 
-Args:
-	id (int): Assume id will always be an int.
-	Default to None
-"""
-if id is not None and type(id) != int:
-	raise TypeError("'id' must be an integer")
+	Args:
+	    id (int): Assume id will always be an int.
+	    Default to None
+	"""
+        if id is not None and type(id) != int:
+	    raise TypeError("'id' must be an integer")
 
-if id is not None:
-	self.id = id
-else:
-	Base.__nb_objects += 1
-	self.id = Base.__nb_objects
+	if id is not None:
+	    self.id = id
+	else:
+	    Base.__nb_objects += 1
+	    self.id = Base.__nb_objects
 
-@classmethod
+	@classmethod
     def create(cls, **dictionary):
 	"""Gets instance with all attributes already set.
 
@@ -54,7 +55,7 @@ else:
 	temp_instance.update(**dictionary)
 	return temp_instance
 
-@staticmethod
+    @staticmethod
     def from_json_string(json_string):
         """Gets the list of the JSON string representation `json_string`
 
@@ -72,7 +73,7 @@ else:
 
 	return json.loads(json_string)
 
- @classmethod
+    @classmethod
     def load_from_file(cls):
         """Returns a list of instances from a file"""
 
@@ -82,7 +83,7 @@ else:
 		return []
 
 
-with open(filename, 'r') as file:
+    with open(filename, 'r') as file:
             json_string = file.read()
 
         list_of_dicts = cls.from_json_string(json_string)
