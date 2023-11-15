@@ -1,6 +1,7 @@
 #!/usr/bin/python3
-"""Tests for Rectangle class in the rectangle module.
-Rectangle module is in the models' package"""
+"""Tests for Rectangle class in the rectangle module
+
+The rectangle module is in models package"""
 
 import unittest
 from unittest.mock import patch
@@ -9,11 +10,10 @@ from models.rectangle import Rectangle
 
 
 class TestRectangle(unittest.TestCase):
-	"""Test cases for Rectangle class"""
-
+    """Test cases for Rectangle class"""
 
     def test_inheritance(self):
-	"""Testing if class properly inherits from its base class"""
+        """Testing if the class properly inherits from its base class"""
 
         base1 = Base()
         rect1 = Rectangle(1, 2)
@@ -164,7 +164,7 @@ class TestRectangle(unittest.TestCase):
             "'width' and 'height'", str(e.exception)
             )
 
-        
+        # check Not a Number
         with self.assertRaises(ValueError) as e:
             Rectangle(1, int('nan'))
         self.assertEqual(str(e.exception), invalid_literal_int)
@@ -242,7 +242,7 @@ class TestRectangle(unittest.TestCase):
         self.assertEqual(str(e.exception), y_value_error_msg)
 
     def test_area(self):
-        """Test for area method"""
+        """Test for the area method"""
 
         rect1 = Rectangle(1, 2)
         self.assertEqual(rect1.area(), 2)
@@ -256,7 +256,7 @@ class TestRectangle(unittest.TestCase):
 
     @patch('builtins.print')
     def test_display(self, mock_print):
-        """Test for display method"""
+        """Test for the display method"""
 
         rect1 = Rectangle(1, 2)
         rect1.display()
@@ -275,7 +275,7 @@ class TestRectangle(unittest.TestCase):
                 )
 
     def test_str(self):
-        """Test `__str__` method"""
+        """Test the `__str__` method"""
 
         rect1 = Rectangle(1, 2)
         rect1.id = 1
@@ -283,7 +283,7 @@ class TestRectangle(unittest.TestCase):
         self.assertEqual(str(rect1), str_expected)
 
     def test_update(self):
-        """Test for `update` method"""
+        """Test for the `update` method"""
 
         rect1 = Rectangle(5, 6, 7, 8, 9)
         self.assertEqual(rect1.id, 9)
@@ -335,9 +335,9 @@ class TestRectangle(unittest.TestCase):
         self.assertEqual(str(e.exception), 'width must be an integer')
 
     def test_to_dictionary(self):
-        """Test for public method to_dictionary.
+        """Test for the public method `to_dictionary`.
 
-        Returns dictionary representation of a Rectangle
+        Returns the dictionary representation of a `Rectangle`
         """
 
         rect1 = Rectangle(2, 1, 2, 1, 2)

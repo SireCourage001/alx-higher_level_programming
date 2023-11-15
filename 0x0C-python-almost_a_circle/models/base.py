@@ -1,77 +1,74 @@
 #!/usr/bin/python3
-
-"""A module for base.py"""
+"""Module ``base``"""
 
 import json
-import turtle
 import csv
 from os import path
 
+
 class Base:
-	"""Base class in the model dir/package.
+    """The base class in the `model` package
 
-	Attr:
-	    nb_objects (int): Private class attr.
-	"""
+    Attributes:
+        nb_objects (int): Private class attribute
+    """
 
-	__nb_objects = 0
-
+    __nb_objects = 0
 
     def __init__(self, id=None):
-	"""Initialize variables for instance of Base class.
+        """Initializes variables for every instance of the `Base` class
 
-	Args:
-	    id (int): Assume id will always be an int.
-	    Default to None
-	"""
+        Args:
+            id (int): It is assumed that `id` will always be an integer.
+                Defaults to `None`
+        """
         if id is not None and type(id) != int:
-	    raise TypeError("'id' must be an integer")
+            raise TypeError("'id' must be an integer")
 
-	if id is not None:
-	    self.id = id
-	else:
-	    Base.__nb_objects += 1
-	    self.id = Base.__nb_objects
+        if id is not None:
+            self.id = id
+        else:
+            Base.__nb_objects += 1
+            self.id = Base.__nb_objects
 
-	@classmethod
+    @classmethod
     def create(cls, **dictionary):
-	"""Gets instance with all attributes already set.
+        """Gets an instance with all attributes already set
 
-	Args:
-		Dictionary (dict): dictionary of instance attributes & values
+        Args:
+            dictionary (dict): A dictionary of instance attributes and values
 
-	Returns:
-		An instance with all attributes set
-	"""
+        Returns:
+            An instance with all attributes set
+        """
+        if cls.__name__ == "Rectangle":
+            temp_instance = cls(1, 1)
+        elif cls.__name__ == "Square":
+            temp_instance = cls(1)
+        else:
+            raise AttributeError("{} is not a valid class".format(
+                cls.__name__))
 
-	if cls.__name__ == "Rectaangle":
-		temp_instance = cls(1, 1)
-	elif cls.__name__ == "Square":
-		temp_instance = cls(1)
-	else:
-		raise AttributeError("{} is not a valid class".format(cls.__name__))
-
-
-	temp_instance.update(**dictionary)
-	return temp_instance
+        temp_instance.update(**dictionary)
+        return temp_instance
 
     @staticmethod
     def from_json_string(json_string):
         """Gets the list of the JSON string representation `json_string`
 
-	Args:
-		json_string (str): JSON string
+        Args:
+            json_string (str): the JSON string
 
-	Returns:
-		Listof the JSON string representation
-	"""
-	if not json_string:
-		return []
+        Returns:
+            The list of the JSON string representation
+        """
+        if not json_string:
+            return []
 
-	 if type(json_string) != str:
+        if type(json_string) != str:
             raise TypeError("'json_string' must be a string")
 
-	return json.loads(json_string)
+        return json.loads(json_string)
 
     @classmethod
     def load_from_file(cls):
@@ -80,10 +77,9 @@ class Base:
         filename = cls.__name__ + ".json"
 
         if not path.exists(filename) or not path.isfile(filename):
-		return []
+            return []
 
-
-    with open(filename, 'r') as file:
+        with open(filename, 'r') as file:
             json_string = file.read()
 
         list_of_dicts = cls.from_json_string(json_string)
@@ -209,4 +205,3 @@ class Base:
 
             csv.DictWriter(csvfile, fieldnames=attrs).writeheader()
             csv.DictWriter(csvfile, fieldnames=attrs).writerows(obj_dicts)
-

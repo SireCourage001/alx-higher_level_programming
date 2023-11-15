@@ -79,11 +79,8 @@ class TestSquare(unittest.TestCase):
         y_type_error_msg = 'y must be an integer'
         y_value_error_msg = 'y must be >= 0'
 
-        invalid_literal_int = "invalid literal for int() with base 10: nan"
-
+        invalid_literal_int = "invalid literal for int() with base 10: 'nan'"
 	
-	# width attribute
-	# check str
 	with self.assertRaises(TypeError) as e:
             Square('1', '2')
         self.assertEqual(str(e.exception), width_type_error_msg)
@@ -192,13 +189,13 @@ class TestSquare(unittest.TestCase):
         self.assertEqual(str(e.exception), y_value_error_msg)
 
     def test_area(self):
-        """Test for area method"""
+        """Test for the area method"""
 
         sq1 = Square(1)
         self.assertEqual(sq1.area(), 1)
 
     def test_str(self):
-        """Test `__str__` method"""
+        """Test the `__str__` method"""
 
         sq1 = Square(1, 2)
         sq1.id = 1
@@ -207,14 +204,14 @@ class TestSquare(unittest.TestCase):
 
     @patch('builtins.print')
     def test_display(self, mock_print):
-        """Test display method inherited from `Rectangle`"""
+        """Test the display method inherited from `Rectangle`"""
 
         sq1 = Square(2)
         sq1.display()
         mock_print.assert_called_with('##\n##\n', end='')
 
     def test_update(self):
-        """Test for update method"""
+        """Test for the `update` method"""
 
         sq1 = Square(5, 6, 7, 8)
         self.assertEqual(sq1.id, 8)
@@ -265,9 +262,9 @@ class TestSquare(unittest.TestCase):
         self.assertEqual(str(e.exception), 'width must be an integer')
 
     def test_to_dictionary(self):
-        """Test for public method to_dictionary.
+        """Test for the public method `to_dictionary`.
 
-        Returns dictionary representation of a `Square`
+        Returns the dictionary representation of a `Square`
         """
 
         sq1 = Square(2, 1, 2, 1)
@@ -286,5 +283,3 @@ class TestSquare(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
-
-

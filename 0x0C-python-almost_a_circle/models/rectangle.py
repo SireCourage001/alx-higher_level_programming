@@ -1,30 +1,30 @@
 #!/usr/bin/python3
-"""Module for rectangle.py.
-It has a class Rectangle that defines a rectangle.
+"""This is the ``rectangle`` module
+
+Contains the class ``Rectangle`` that defines a rectangle
 """
 
-form models.base import Bse
+from models.base import Base
 
 
 class Rectangle(Base):
-	"""A Rectangle sub-class that inherits from parent Base class"""
+    """This is the ``Rectangle`` sub-class that inherits from ``Base`` class"""
 
-	def __init__(self, width, height, x=0, y=0, id=None):
-		"""Initialize variables for each instance of Rectangle class.
+    def __init__(self, width, height, x=0, y=0, id=None):
+        """Initializes variables for each instance of the `Rectangle` class
 
-		Args:
-			width (int): Width of Rectangle
-			height (int): Height of Rectangle.
-			x (int): Offset on x-axis.
-			y (int): Ofset on y-axis.
-			id (int): Identification number of Rectangle instance.
+        Args:
+            width (int): width of the Rectangle
+            height (int): height of the Rectangle
+            x (int): offset on the x axis
+            y (int): offset on the y axis
+            id (int): Identification number of the `Rectangle` instance
 
-		Raises:
-			TypeError: If any of the argument is not an int.
-			ValueError: If any of the arguments does not match its requirement.
-		"""
-
-	super().__init__(id)
+        Raises:
+            TypeError: if any of the arguments is not an `int`
+            ValueError: if any of the arguments does not match its requirement
+        """
+        super().__init__(id)
 
         self.validate_width_and_height(width, "width")
         self.width = width
@@ -39,22 +39,22 @@ class Rectangle(Base):
         self.y = y
 
     def __str__(self):
-        """Returns a string represantation class"""
+        """Returns a string represantation of the class"""
         return "[Rectangle] ({:d}) {:d}/{:d} - {:d}/{:d}".format(
             self.id, self.x, self.y, self.width, self.height
         )
 
     @staticmethod
     def validate_width_and_height(value, name):
-        """Validates value of an attribute
+        """Validates the value of an attribute
 
         Args:
             value (int): Integer value to validate
             name (str): Name of the attribute
 
         Raises:
-            TypeError: If `value` is not an integer
-            ValueError: If `name` is `width` or `height` and `value` <= 0
+            TypeError: if `value` is not an integer
+            ValueError: if `name` is `width` or `height` and `value` <= 0
         """
         if type(value) != int:
             raise TypeError("{:s} must be an integer".format(name))
@@ -63,15 +63,15 @@ class Rectangle(Base):
 
     @staticmethod
     def validate_x_and_y(value, name):
-        """Validates value of an attribute
+        """Validates the value of an attribute
 
         Args:
             value (int): Integer value to validate
             name (str): Name of the attribute
 
         Raises:
-            TypeError: If `value` is not an integer
-            ValueError: If `name` is `x` or `y` and `value` < 0
+            TypeError: if `value` is not an integer
+            ValueError: if `name` is `x` or `y` and `value` < 0
         """
         if type(value) != int:
             raise TypeError("{:s} must be an integer".format(name))
@@ -79,11 +79,11 @@ class Rectangle(Base):
             raise ValueError("{:s} must be >= 0".format(name))
 
     def area(self):
-        """Returns area value of the `Rectangle` instance"""
+        """Returns the area value of the `Rectangle` instance"""
         return self.width * self.height
 
     def display(self):
-        """Prints in stdout, `Rectangle` instance with the `#`"""
+        """Prints in stdout the `Rectangle` instance with the `#`"""
         display_rectangle = '\n' * self.y
         for _ in range(self.height):
             display_rectangle += (' ' * self.x) + ('#' * self.width) + '\n'
@@ -92,11 +92,11 @@ class Rectangle(Base):
 
     @property
     def height(self):
-        """int: Height attribute
+        """int: The `height` attribute
 
         Raises:
-            TypeError: If value is not int
-            ValueError: If value is <= 0
+            TypeError: if value is not int
+            ValueError: if value is <= 0
         """
         return self.__height
 
@@ -106,7 +106,7 @@ class Rectangle(Base):
         self.__height = value
 
     def to_dictionary(self):
-        """Returns dictionary represantation of a `Rectangle` instance"""
+        """Returns the dictionary represantation of a `Rectangle` instance"""
 
         return {
             'id': self.id,
@@ -129,11 +129,11 @@ class Rectangle(Base):
 
     @property
     def width(self):
-        """int: Width attribute
+        """int: The `width` attribute
 
         Raises:
-            TypeError: If value is not int
-            ValueError: If value is <= 0
+            TypeError: if value is not int
+            ValueError: if value is <= 0
         """
         return self.__width
 
@@ -144,11 +144,11 @@ class Rectangle(Base):
 
     @property
     def x(self):
-        """int: x attribute
+        """int: The `x` attribute
 
         Raises:
-            TypeError: If value is not int
-            ValueError: If value is < 0
+            TypeError: if value is not int
+            ValueError: if value is < 0
         """
         return self.__x
 
@@ -159,11 +159,11 @@ class Rectangle(Base):
 
     @property
     def y(self):
-        """int: y attribute
+        """int: The `y` attribute
 
         Raises:
-            TypeError: If value is not int
-            ValueError: If value is < 0
+            TypeError: if value is not int
+            ValueError: if value is < 0
         """
         return self.__y
 
