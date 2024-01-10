@@ -1,4 +1,4 @@
 #!/usr/bin/node
 
 class Rectangle {}
-modlue.export = Rectangle;
+module.exports = Rectangle;
