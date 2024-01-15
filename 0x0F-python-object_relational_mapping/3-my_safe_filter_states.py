@@ -7,16 +7,16 @@ this version is safe from MySQL injection
 import MySQLdb
 from sys import argv, stderr
 
-def get_States():
+
+def getState():
     """list all states matching user input in database `hbtn_0e_0_usa`"""
 
-    err_mssg = "usage: {} <username> <passwd> <db_name> <state_name>\n".format(
+    err_msg = "usage: {} <username> <passwd> <db_name> <state_name>\n".format(
         argv[0])
 
     if len(argv) != 5:
-        stderr.write(err_mssg)
-	return
-
+        stderr.write(err_msg)
+        return
 
     username, password, db_name, state = argv[1], argv[2], argv[3], argv[4]
 
@@ -34,11 +34,11 @@ def get_States():
     cur.execute(query, (state,))
     result = cur.fetchall()
 
-    for state in result:
-        print(state)
+    for row in result:
+        print(row)
 
     db.close()
 
 
 if __name__ == "__main__":
-    get_States()
+    getState()
