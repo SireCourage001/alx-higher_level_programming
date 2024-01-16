@@ -1,14 +1,16 @@
 #!/usr/bin/python3
 
-"""This script takes in an argument and displays all values in
- the states table of hbtn_0e_0_usa where name matches arguments"""
+"""
+This script takes in an argument and displays all values in
+the states table of hbtn_0e_0_usa where name matches arguments
+"""
 
 import MySQLdb
 from sys import argv, stderr
 
 
 def getState():
-    """List all states matching user input in database `hbtn_0e_0_usa`"""
+    """Show all states matching user input in database `hbtn_0e_0_usa`"""
 
     err_msg = "usage: {} <username> <passwd> <db_name> <state_name>\n".format(
         argv[0])

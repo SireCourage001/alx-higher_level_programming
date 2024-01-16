@@ -3,25 +3,37 @@
 from the database hbtn_0e_0_usa"""
 
 import MySQLdb
-import sys
+from sys import argv, stderr
+
+
+def listOf_States_Starting_With_N():
+    """Fxn to list only the states that start with N in given database"""
+
+    err_message = "usage: {} <username> <password> <db_name>\n".format(argv[0])
+    if len(argv) != 4:
+        stderr.write(err_message)
+        return
+
+    username, password, db_name = argv[1], argv[2], argv[3]
+
+    db = MySQLdb.connect(
+        host="localhost",
+	user=username,
+	passwd=password,
+	db=db_name,
+	charset="utf8",
+	port=3306
+    )
+
+    cur = db.cursor()
+    cur.execute("SELECT * FROM states WHERE name LIKE BINARY 'N%' ORDER BY id ASC")
+    results = cur.fetchall()
+
+    for line in results:
+        print(line)
+
+    db.close()
+
 
 if __name__ == "__main__":
-    db = MySQLdb.connect(host='localhost',
-                         user=sys.argv[1],
-                         passwd=sys.argv[2],
-                         db=sys.argv[3],
-                         port=3306)
-    """In order to put our new connnection to good use we
-     need to create a cursor object"""
-    cur = db.cursor()
-    """The execute function requires one parameter, the query."""
-    cur.execute("SELECT * FROM states\
-        WHERE name REGEXP BINARY '^N'\
-            ORDER BY id ASC")
-    rows = cur.fetchall()
-    for row in rows:
-        print(row)
-    """ Close all cursors"""
-    cur.close()
-    """Close all databases"""
-    db.close()
+    listOf_States_Starting_With_N()
