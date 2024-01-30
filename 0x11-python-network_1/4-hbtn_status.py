@@ -7,11 +7,14 @@ You must use the package reuest
 
 import requests
 
-if __name__ == "__main__":
+def get_url():
+        """Fetches data from the given_url `https://alx-intranet.hbtn.io/status`"""
+            given_url = 'https://alx-intranet.hbtn.io/status'
+                response = requests.get(given_url)
+                    print("Body response:")
+                        print(f"\t- type: {type(response.text)}\n\t- content: {response.text}")
 
-url = "https://intranet.hbtn.io/status"
-req = requests.get(url)
-print('Body response:')
-print('\t- type: {}'.format(type(req.text)))
-print('\t- content: {}'.format(req.text))
+
+    if __name__ == "__main__":
+        get_url()
 
