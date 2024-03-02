@@ -1,96 +1,77 @@
 #!/usr/bin/python3
-"""Module for creating a singly linked list"""
-class Node:
+"""This module contains a class that defines a square.
+In the Square class we initialize each object by the
+__init__ method with a private instance variable called
+__size that takes the size variable's value passed as
+argument. Also checks if the size arg has a valid value.
+"""
+
+
+class Node():
+    """Node Class."""
+
     def __init__(self, data, next_node=None):
-        if not isinstance(data, int):
-            raise TypeError("data must be an integer")
+        """Initialization of Node Class"""
+        self.data = data
+        self.next_node = next_node
 
-        self.__data = data
-
-        if next_node and not isinstance(next_node, Node):
-            raise TypeError("next_node must be a Node object")
-
-        self.__next_node = next_node
-
-        @property
+    @property
     def data(self):
-
+        """Data"""
         return self.__data
 
-     @data.setter
-    def data(self, value):
-        if not isinstance(value, int):
+    @data.setter
+    def data(self, DataValue):
+        """Set data"""
+        if type(DataValue) != int:
             raise TypeError("data must be an integer")
+        self.__data = DataValue
 
-        self.__data = value
-
-        @property
+    @property
     def next_node(self):
-        
+        """Node"""
         return self.__next_node
 
-
     @next_node.setter
-    def next_node(self, value):
-        if value and not isinstance(value, Node):
+    def next_node(self, NodeValue):
+        """set Node"""
+        if NodeValue is not None and not isinstance(NodeValue, Node):
             raise TypeError("next_node must be a Node object")
+        self.__next_node = NodeValue
 
-        self.__next_node = value
 
-
-class SinglyLinkedList(Node):
-    """Creates a singly linked list"""
-
+class SinglyLinkedList():
+    """Class SinglyLinkedList"""
     def __init__(self):
-        """Instantiates the private attribute head"""
+        """Initialization of SinglyLinkedList"""
         self.__head = None
 
-    def sorted_insert(self, value):
-        """Sorts the linked list and add a new node in place
-        """
-
-        newNode = Node(value)
-
+    def sorted_insert(self, DataValue):
+        """Inserts a nodes"""
+        NewNode = Node(DataValue)
         if self.__head is None:
-            newNode.next_node = None
-            self.__head = newNode
-        elif self.__head.data > value:
-            newNode.next_node = self.__head
-            self.__head = newNode
-        else:
-            temp = self.__head
-
-            while (temp.next_node and temp.next_node.data < value):
-                temp = temp.next_node
-
-            newNode.next_node = temp.next_node
-            temp.next_node = newNode
-
-    def __repr__(self):
-        return "<class 'SinglyLinkedList'>"
+            self.__head = NewNode
+            return
+        if DataValue < self.__head.data:
+            NewNode.next_node = self.__head
+            self.__head = NewNode
+            return
+        actual = self.__head
+        while DataValue >= actual.data:
+            prev = actual
+            if actual.next_node:
+                actual = actual.next_node
+            else:
+                actual.next_node = NewNode
+                return
+        prev.next_node = NewNode
+        NewNode.next_node = actual
 
     def __str__(self):
-        """Prints the data in the list, one line per node data
-        """
-
-        temp = self.__head
-        list_items = []
-
-        while temp:
-            list_items.append(str(temp.data))
-            temp = temp.next_node
-
-        return ('\n'.join(list_items))
-
-    def __len__(self):
-        
-        if self.__head:
-            cnts = 0
-            temp = self.__head
-
-            while temp:
-                cnts += 1
-                temp = temp.next_node
-            return cnts
-        return 0
-
+        """Class As a String"""
+        strg = ""
+        actual = self.__head
+        while actual:
+            strg += str(actual.data) + "\n"
+            actual = actual.next_node
+        return strg[:-1]
